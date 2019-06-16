@@ -6,12 +6,12 @@
  * @flow
  */
 import React, {Component} from 'react';
+import DrawerNavigator from './Utils/DrawerNavigator'
 import {
   createAppContainer
 } from 'react-navigation';
-import AppNavigator from './AppNavigator'
 
-const App = createAppContainer(AppNavigator);
+const App = createAppContainer(DrawerNavigator);
 
 export default App;
 

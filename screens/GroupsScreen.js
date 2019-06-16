@@ -1,15 +1,19 @@
 import React from "react";
 import { View, Text,Button } from "react-native";
 
-export default class Home extends React.Component {
+export default class Groups extends React.Component {
+    static navigationOptions = {
+      drawerLabel: 'Groups'
+    }
+
     render() {
       return (
         <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-          <Text>Home Screen</Text>
+          <Text>Groups</Text>
           <Button
           title="Back to signup"
           onPress={() =>
-            this.props.navigation.navigate('Signup')
+            this.props.navigation.openDrawer()
           }
         />
         </View>
