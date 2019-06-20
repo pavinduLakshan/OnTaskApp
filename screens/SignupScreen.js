@@ -1,14 +1,36 @@
 import React from "react";
 import { View, Text, Button, TextInput } from "react-native";
+import SENDER from '../Utils/SENDER'
+import axios from 'react-native-axios'
 import PhoneInput from "react-native-phone-input";
 
 export default class Signup extends React.Component {
+  static navigationOptions = {
+    drawerLabel: "Signup",
+  };
+
   constructor(props) {
     super(props);
     this.state = {
       fname: "",
       mobile: "",
     };
+  }
+
+  signUp = () => {
+    axios.post('http://192.168.1.100:8080/api/auth/signup/mobile',{
+      fname: this.state.fname,
+      mobile: this.state.mobile,
+      headers: {
+        "Accept": "application/json",
+        "Content-type": "application/json"
+      }
+    }).then(
+      res => {console.log(res);return res}
+    ).catch(err => {
+      console.log(err)
+      throw err
+    })
   }
 
   render() {
@@ -46,7 +68,7 @@ export default class Signup extends React.Component {
         <Button
           title="Sign up"
           style={{ marginLeft: "25%", height: 100, width: 300 }}
-          onPress={() => this.props.navigation.navigate("Home")}
+          onPress={() => this.signUp()}
         />
       </View>
     );
