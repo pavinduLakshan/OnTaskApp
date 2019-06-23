@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text,Button,Image } from "react-native";
 import { DrawerActions } from 'react-navigation';
+import Layout from '../components/Layout'
 
 export default class Home extends React.Component {
     static navigationOptions = {
@@ -26,13 +27,8 @@ export default class Home extends React.Component {
 
     render() {
       return (
-        <View>
-          <Button
-          title="Menu"
-          onPress={() =>
-            this.props.navigation.dispatch(DrawerActions.openDrawer())
-          }
-        />
+        <Layout navigation = {this.props.navigation}>
+          <View>
          <Image
          resizeMode = 'cover'
                    style={{ height: 250}}
@@ -40,6 +36,7 @@ export default class Home extends React.Component {
         />
 
         </View>
+        </Layout>
       );
     }
   }

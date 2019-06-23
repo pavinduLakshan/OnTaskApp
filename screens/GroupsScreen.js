@@ -1,5 +1,6 @@
 import React from "react";
-import { View, Text, Button, FlatList } from "react-native";
+import { View, Text, Button, FlatList,  TouchableOpacity } from "react-native";
+import Layout from '../components/Layout'
 
 const styles = {
   item: { 
@@ -17,11 +18,8 @@ export default class Groups extends React.Component {
 
   render() {
     return (
+      <Layout navigation = {this.props.navigation}>
       <View>
-        <Button
-          title="Menu"
-          onPress={() => this.props.navigation.openDrawer()}
-        />
         <Text style={{ fontSize: 40,padding: "2%" }}>Groups</Text>
         <FlatList
           data={[
@@ -35,18 +33,26 @@ export default class Groups extends React.Component {
             { key: "Julie" },
           ]}
           renderItem={({ item }) => (
-            <View style={styles.item}>
-              <View>
+            <TouchableOpacity style={styles.item} 
+            onPress={() => {
+              this.props.navigation.navigate('Home', {
+                itemId: 86,
+                otherParam: 'anything you want here',
+              });
+            }}
+            >
+             <View>
                 <Text>Image</Text>
               </View>
               <View>
                 <Text style={{ fontSize: 20 }}>{item.key}</Text>
                 <Text>Last activity</Text>
               </View>
-            </View>
+          </TouchableOpacity>
           )}
         />
       </View>
+      </Layout>
     );
   }
 }
