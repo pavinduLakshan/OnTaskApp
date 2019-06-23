@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View,ToolbarAndroid } from "react-native";
+import Icon from 'react-native-vector-icons/dist/FontAwesome';
 
 class Layout extends Component {
     onActionSelected = position =>  {
@@ -15,7 +16,7 @@ class Layout extends Component {
     render() {
         return (
            <View>
-                <ToolbarAndroid
+                <Icon.ToolbarAndroid
         style={{
           backgroundColor: '#2196F3',
           height: 56,
@@ -23,10 +24,10 @@ class Layout extends Component {
           textAlign: 'center',
         }}
       logo={{uri: 'https://picsum.photos/200/300'}}
-      navIcon={{uri: 'https://picsum.photos/100/100'}}
+      navIconName="navicon"
       onIconClicked={this.openDrawer}
       title="OnTask"
-      actions={[{title: 'Settings', icon: {uri: 'https://picsum.photos/200/300'}, show: 'always'}]}
+      actions={[{title: 'Settings', iconName: "search", show: 'always'}]}
       onActionSelected={this.onActionSelected} 
       />
       {this.props.children}
