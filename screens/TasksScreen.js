@@ -1,57 +1,31 @@
-import React from 'react';
-import { Text, View,Button } from 'react-native';
-import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
-import { DrawerActions } from 'react-navigation';
+import React,{ Fragment} from 'react';
+import Icon from 'react-native-vector-icons/dist/FontAwesome';
+import TaskTabs from '../Utils/TaskTabNavigator'
 
-class DueScreen extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Due</Text>
-        <Button
-          title="Menu"
-          onPress={() =>
-            this.props.navigation.dispatch(DrawerActions.openDrawer())
-          }
-        />
-      </View>
-    );
+export default class TaskScreen extends React.Component{
+  openDrawer = () => {
+    this.props.navigation.openDrawer()
+  }
+
+  render(){
+    return(
+        <Fragment>
+                   <Icon.ToolbarAndroid
+        style={{
+          backgroundColor: '#2196F3',
+          height: 56,
+          alignSelf: 'stretch',
+          textAlign: 'center',
+        }}
+      logo={{uri: 'https://picsum.photos/200/300'}}
+      navIconName="navicon"
+      onIconClicked={this.openDrawer}
+      title="OnTask"
+      actions={[{title: 'Settings', iconName: "search", show: 'always'}]}
+      onActionSelected={this.onActionSelected} 
+      />
+          <TaskTabs />
+        </Fragment>
+    )
   }
 }
-
-class CompletedScreen extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Completed</Text>
-      </View>
-    );
-  }
-}
-
-class OverDueScreen extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Overdue</Text>
-      </View>
-    );
-  }
-}
-
-const TabNavigator = createBottomTabNavigator({
-  Due: { screen: DueScreen },
-  Completed: { screen: CompletedScreen },
-  Overdue: { screen: OverDueScreen },
-},
-{
-  tabBarOptions: {
-    labelStyle: {
-      fontSize: 20,
-      margin: 0,
-      padding: 0,
-    }
-}
-});
-
-export default createAppContainer(TabNavigator);
