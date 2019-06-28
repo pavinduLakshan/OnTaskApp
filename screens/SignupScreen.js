@@ -1,8 +1,20 @@
 import React from "react";
-import { View, Text, Button, TextInput } from "react-native";
+import { View, TextInput } from "react-native";
 import SENDER from '../Utils/SENDER'
 import axios from 'react-native-axios'
 import PhoneInput from "react-native-phone-input";
+import {
+  Container,
+  Header,
+  Button,
+  Text,
+  Body,
+  Form,
+  Item as FormItem,
+  Input,
+  Label,
+  Title,
+} from 'native-base';
 
 export default class Signup extends React.Component {
   static navigationOptions = {
@@ -35,44 +47,36 @@ export default class Signup extends React.Component {
 
   render() {
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text style={{ fontSize: 40,marginBottom: "5%"}}>Signup</Text>
-        
-        <TextInput
-          style={{
-            height: 50,
-            borderColor: "black",
-            width: 300,
-            borderWidth: 1,
-            marginBottom: "5%",
-            borderRadius: 10
-          }}
-          onChangeText={text => this.setState({ fname: text })}
-          value={this.state.fname}
-        />
+      <View style={{paddingTop: "40%"}}>
+        <Text style={{textAlign: "center",fontSize: 40}}>OnTask</Text>
+        <Text style={{fontSize: 20,textAlign: "center"}}>Signup</Text>
+        <Form>
+        <FormItem>
+          <Label>First Name</Label>
+          <Input />
+        </FormItem>
 
-        <PhoneInput
+        <Label style={{marginTop: "3%",marginLeft: "4%"}}>Mobile Number</Label>
+          <PhoneInput
           ref="phone"
           style={{
             height: 50,
-            padding: 10,
-            borderColor: "black",
+            padding: 10,            
             width: 300,
-            borderWidth: 1,
+            marginLeft: "2%",
             marginBottom: "5%",
             borderRadius: 10
           }}
           onChangePhoneNumber={ number => this.setState({mobile: number})}
-        />
+/>
 
-        <Button
-          title="Sign up"
-          style={{ marginLeft: "25%", height: 100, width: 300 }}
-          onPress={() => this.signUp()}
-        />
+        <Button full primary style={{ paddingBottom: 4,marginLeft: "4%",marginRight: "4%"}} onPress={() => this.signUp()}>
+          <Text> Sign Up </Text>
+        </Button>
+
+      </Form>
       </View>
     );
   }
 }
 
-//
