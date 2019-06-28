@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, Button, FlatList,  TouchableOpacity } from "react-native";
 import Layout from '../components/Layout'
+import ActionBar from '../components/ActionBar'
 
 const styles = {
   item: { 
@@ -18,8 +19,8 @@ export default class Groups extends React.Component {
 
   render() {
     return (
-      <Layout navigation = {this.props.navigation}>
       <View>
+        <ActionBar navigation = {this.props.navigation} name={"Groups"}/>
         <Text style={{ fontSize: 40,padding: "2%" }}>Groups</Text>
         <FlatList
           data={[
@@ -35,9 +36,8 @@ export default class Groups extends React.Component {
           renderItem={({ item }) => (
             <TouchableOpacity style={styles.item} 
             onPress={() => {
-              this.props.navigation.navigate('Home', {
-                itemId: 86,
-                otherParam: 'anything you want here',
+              this.props.navigation.navigate('Group', {
+                name: item.key,
               });
             }}
             >
@@ -52,7 +52,6 @@ export default class Groups extends React.Component {
           )}
         />
       </View>
-      </Layout>
     );
   }
 }
