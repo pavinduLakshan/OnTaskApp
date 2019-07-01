@@ -29,12 +29,15 @@ export default class Home extends React.Component {
       return (
         <Layout navigation = {this.props.navigation}>
           <View>
+            <View >
+              <Text style={{fontSize: 40}}>Today</Text>
+              <Text style={{color: "red",fontSize: 20}}>{new Date().toJSON().slice(0,10)}</Text>
+            </View>
          <Image
          resizeMode = 'cover'
                    style={{ height: 250}}
-          source={{ uri: `https://source.unsplash.com/featured/?${this.state.mood},nature`}}
+          source={{ uri: `https://source.unsplash.com/featured/?${this.state.mood},forest`}}
         />
-
         </View>
         </Layout>
       );
