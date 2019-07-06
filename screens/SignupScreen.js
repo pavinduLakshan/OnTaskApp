@@ -1,5 +1,6 @@
 import React from "react";
 import { View, TextInput } from "react-native";
+import { AsyncStorage } from '@react-native-community/async-storage'
 import SENDER from '../Utils/SENDER'
 import axios from 'react-native-axios'
 import PhoneInput from "react-native-phone-input";
@@ -30,19 +31,21 @@ export default class Signup extends React.Component {
   }
 
   signUp = () => {
-    axios.post('http://192.168.1.100:8080/api/auth/signup/mobile',{
-      fname: this.state.fname,
-      mobile: this.state.mobile,
-      headers: {
-        "Accept": "application/json",
-        "Content-type": "application/json"
-      }
-    }).then(
-      res => {console.log(res);return res}
-    ).catch(err => {
-      console.log(err)
-      throw err
-    })
+    AsyncStorage.setItem('token','tokaka')
+    this.props.navigation.navigate('Dashboard')
+    // axios.post('http://192.168.1.100:8080/api/auth/signup/mobile',{
+    //   fname: this.state.fname,
+    //   mobile: this.state.mobile,
+    //   headers: {
+    //     "Accept": "application/json",
+    //     "Content-type": "application/json"
+    //   }
+    // }).then(
+    //   res => {console.log(res);return res}
+    // ).catch(err => {
+    //   console.log(err)
+    //   throw err
+    // })
   }
 
   render() {
