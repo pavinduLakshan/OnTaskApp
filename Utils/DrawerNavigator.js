@@ -5,6 +5,7 @@ import Groups from '../screens/GroupsScreen';
 import Tasks from '../screens/TasksScreen'
 import Group from '../screens/GroupScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import CheckAuth from '../Utils/CheckAuth'
 import CustomDrawer from './CustomDrawer'
 
 const DrawNavigator = createDrawerNavigator({
@@ -17,11 +18,12 @@ const DrawNavigator = createDrawerNavigator({
     }},
   Groups: { screen: Groups},
   Signup: { screen: Signup},
+  CheckAuth: {screen: CheckAuth}
   },{
-  initialRouteName: 'Dashboard',
+  initialRouteName: 'CheckAuth',
 contentComponent: CustomDrawer,
 drawerOpenRoute: 'drawerOpen',
 drawerCloseRoute: 'drawerClose',
 drawerToggleRoute: 'drawerToggle'});
 
-export default DrawNavigator;
+export default DrawNavigator
