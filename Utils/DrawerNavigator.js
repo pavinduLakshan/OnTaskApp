@@ -2,6 +2,7 @@ import {createDrawerNavigator} from 'react-navigation'
 import Home from '../screens/HomeScreen';
 import Signup from '../screens/SignupScreen';
 import Groups from '../screens/GroupsScreen';
+import VerifyMobile from '../screens/VerifyMobileScreen'
 import Tasks from '../screens/TasksScreen'
 import Group from '../screens/GroupScreen';
 import ProfileScreen from '../screens/ProfileScreen';
@@ -12,6 +13,7 @@ const DrawNavigator = createDrawerNavigator({
   Dashboard: { screen: Home },
   Profile: { screen: ProfileScreen},
   Tasks: { screen: Tasks},
+  VerifyMobile: {screen: VerifyMobile},
   Group: {screen: Group,
     navigationOptions: {
       drawerLabel: () => null
