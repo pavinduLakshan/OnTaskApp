@@ -10,7 +10,7 @@ class ActionBar extends Component {
         return (
             <Icon.ToolbarAndroid
             style={{
-              backgroundColor: '#2196F3',
+              backgroundColor: 'red',
               height: 56,
               alignSelf: 'stretch',
               textAlign: 'center',

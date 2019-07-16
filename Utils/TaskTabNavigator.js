@@ -8,12 +8,6 @@ class DueScreen extends React.Component {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text>Due</Text>
-        <Button
-          title="Menu"
-          onPress={() =>
-            this.props.navigation.dispatch(DrawerActions.openDrawer())
-          }
-        />
       </View>
     );
   }

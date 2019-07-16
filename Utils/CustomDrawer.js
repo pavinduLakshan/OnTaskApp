@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
 import {NavigationActions} from 'react-navigation';
 import { Text, View, StyleSheet, ImageBackground } from 'react-native'
-import Home from '../screens/HomeScreen';
-import Signup from '../screens/SignupScreen';
-import Groups from '../screens/GroupsScreen';
-import Tasks from '../screens/TasksScreen'
-import Group from '../screens/GroupScreen';
-import Profile from '../screens/ProfileScreen';
+import Icon from 'react-native-vector-icons/dist/FontAwesome';
 
 export default class drawerContentComponents extends Component {
 
@@ -22,21 +17,25 @@ export default class drawerContentComponents extends Component {
     return (
         <View style={styles.container}>
             <View style={styles.headerContainer}>
-                <ImageBackground source={{uri: "https://source.unsplash.com/featured/?morning,forest"}} style={{flex: 1, width: 280, justifyContent: 'center'}} >
+                <ImageBackground source={{uri: "https://source.unsplash.com/featured/?morning,light"}} style={{flex: 1, width: 280,justifyContent: 'center'}} >
                     <Text style={styles.headerText}>Pavindu Lakshan</Text>
                 </ImageBackground>
             </View>
             <View style={styles.screenContainer}>
                 <View style={[styles.screenStyle, (this.props.activeItemKey=='Dashboard') ? styles.activeBackgroundColor : null]}>
-                    <Text style={[styles.screenTextStyle, (this.props.activeItemKey=='Dashboard') ? styles.selectedTextStyle : null]} onPress={this.navigateToScreen('Dashboard')}>Dashboard</Text>
+                    <Icon name="home" size={30}/>
+                    <Text style={[styles.screenTextStyle, (this.props.activeItemKey=='Dashboard') ? styles.selectedTextStyle : null]} onPress={this.navigateToScreen('Dashboard')}>Home</Text>
                 </View>
                 <View style={[styles.screenStyle, (this.props.activeItemKey=='Profile') ? styles.activeBackgroundColor : null]}>
+                    <Icon name="user" size={30} />
                     <Text style={[styles.screenTextStyle, (this.props.activeItemKey=='Profile') ? styles.selectedTextStyle : null]} onPress={this.navigateToScreen('Profile')}>Profile</Text>
                 </View>
                 <View style={[styles.screenStyle, (this.props.activeItemKey=='Tasks') ? styles.activeBackgroundColor : null]}>
+                    <Icon name="tasks" size={30}/>
                     <Text style={[styles.screenTextStyle, (this.props.activeItemKey=='Tasks') ? styles.selectedTextStyle : null]} onPress={this.navigateToScreen('Tasks')}>Tasks</Text>
                 </View>
                 <View style={[styles.screenStyle, (this.props.activeItemKey=='Groups') ? styles.activeBackgroundColor : null]}>
+                    <Icon name="group" size={30}/>
                     <Text style={[styles.screenTextStyle, (this.props.activeItemKey=='Groups') ? styles.selectedTextStyle : null]} onPress={this.navigateToScreen('Groups')}>Groups</Text>
                 </View>
             </View>
@@ -57,16 +56,17 @@ const styles = StyleSheet.create({
     },
     screenContainer: { 
         width: '100%',
+        paddingTop: "10%"
     },
     screenStyle: {
         height: 30,
-        marginTop: 20,
+        padding: 25,
         flexDirection: 'row',
         alignItems: 'center',
         width: '100%'
     },
     screenTextStyle:{
-        fontSize: 30,
+        fontSize: 25,
         marginLeft: 20, 
         textAlign: 'center'
     },
