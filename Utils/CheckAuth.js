@@ -9,7 +9,13 @@ class CheckAuth extends Component {
     
      _bootstrapAsync = async () => {
         const userToken = await AsyncStorage.getItem('token');
-        this.props.navigation.navigate(userToken ? 'Dashboard' : 'Signup');
+        if(userToken){
+            this.props.navigation.navigate('Dashboard');
+        }
+        else{
+            await AsyncStorage.removeItem('token')
+            this.props.navigation.navigate('Signup');
+        }
       };
     
     render() {

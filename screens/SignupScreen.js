@@ -1,7 +1,5 @@
 import React from "react";
 import { View, Alert } from "react-native";
-import AsyncStorage from "@react-native-community/async-storage";
-import SENDER from "../Utils/SENDER";
 import axios from "react-native-axios";
 import PhoneInput from "react-native-phone-input";
 import {
@@ -28,12 +26,6 @@ export default class Signup extends React.Component {
 
   showError = () => {
     Alert.alert("Sorry.Some required fields are msissing.");
-  };
-
-  setToken = async () => {
-    await AsyncStorage.setItem("token", "tokka").then(val => {
-        this.props.navigation.navigate('Dashboard');
-    });
   };
 
   signUp = () => {
