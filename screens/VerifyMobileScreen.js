@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { View, Alert } from "react-native";
 import CodeInput from "react-native-confirmation-code-input";
+import AsyncStorage from '@react-native-community/async-storage';
 import { Text } from "native-base";
 import axios from 'react-native-axios'
 
@@ -14,6 +15,14 @@ export default class VerifyMobile extends Component {
         }   
     }
 
+    setToken = async token => {
+      await AsyncStorage.setItem("token", token).then(async val => {
+          const token = await AsyncStorage.getItem('token')
+          console.log(token)
+          this.props.navigation.navigate('Dashboard');
+      });
+    };
+
   _onFulfill =  code => {
     Alert.alert(code)
     axios.post('http://192.168.1.100:8080/api/auth/verify/mobile',{
@@ -23,7 +32,13 @@ export default class VerifyMobile extends Component {
     }).then(
         res => {
             if(res.status === 200){
-                this.props.navigation.navigate('Dashboard')
+              axios.post('http://192.168.1.100:8080/api/auth/signin/mobile',{
+                email: this.state.mobile,
+                password: this.state.mobile
+              }).then(res => {
+                console.log(res)
+                this.setToken(res.data.accessToken)
+              })
             }
         }
     )
