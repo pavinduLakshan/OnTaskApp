@@ -23,19 +23,19 @@ export default class drawerContentComponents extends Component {
             </View>
             <View style={styles.screenContainer}>
                 <View style={[styles.screenStyle, (this.props.activeItemKey=='Dashboard') ? styles.activeBackgroundColor : null]}>
-                    <Icon name="home" size={30}/>
+                    <Icon name="home" size={30} style={{width: 50}}/>
                     <Text style={[styles.screenTextStyle, (this.props.activeItemKey=='Dashboard') ? styles.selectedTextStyle : null]} onPress={this.navigateToScreen('Dashboard')}>Home</Text>
                 </View>
                 <View style={[styles.screenStyle, (this.props.activeItemKey=='Profile') ? styles.activeBackgroundColor : null]}>
-                    <Icon name="user" size={30} />
+                    <Icon name="user" size={30} style={{width: 50}}/>
                     <Text style={[styles.screenTextStyle, (this.props.activeItemKey=='Profile') ? styles.selectedTextStyle : null]} onPress={this.navigateToScreen('Profile')}>Profile</Text>
                 </View>
                 <View style={[styles.screenStyle, (this.props.activeItemKey=='Tasks') ? styles.activeBackgroundColor : null]}>
-                    <Icon name="tasks" size={30}/>
+                    <Icon name="tasks" size={30} style={{width: 50}}/>
                     <Text style={[styles.screenTextStyle, (this.props.activeItemKey=='Tasks') ? styles.selectedTextStyle : null]} onPress={this.navigateToScreen('Tasks')}>Tasks</Text>
                 </View>
                 <View style={[styles.screenStyle, (this.props.activeItemKey=='Groups') ? styles.activeBackgroundColor : null]}>
-                    <Icon name="group" size={30}/>
+                    <Icon name="group" size={30} style={{width: 50}}/>
                     <Text style={[styles.screenTextStyle, (this.props.activeItemKey=='Groups') ? styles.selectedTextStyle : null]} onPress={this.navigateToScreen('Groups')}>Groups</Text>
                 </View>
             </View>
@@ -55,8 +55,7 @@ const styles = StyleSheet.create({
         color: '#fff8f8',
     },
     screenContainer: { 
-        width: '100%',
-        paddingTop: "10%"
+        width: '100%'
     },
     screenStyle: {
         height: 30,
@@ -66,7 +65,7 @@ const styles = StyleSheet.create({
         width: '100%'
     },
     screenTextStyle:{
-        fontSize: 25,
+        fontSize: 20,
         marginLeft: 20, 
         textAlign: 'center'
     },
