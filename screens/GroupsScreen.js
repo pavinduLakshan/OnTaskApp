@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, FlatList, TouchableOpacity } from "react-native";
 import { Button } from "native-base";
+import axios from 'axios'
 import Icon from "react-native-vector-icons/MaterialIcons";
 import ActionBar from "../components/ActionBar";
 
@@ -19,6 +20,22 @@ export default class Groups extends React.Component {
     drawerLabel: "Groups",
   };
 
+  state={
+    groups: []
+  }
+
+  componentDidMount(){
+    axios.get("/auth/user/me")
+    .then(res => {
+      axios.get('/'+res.data.id + '/groups').then(res => {
+        console.log(res.data)
+        this.setState({groups: res.data})
+      }).catch(err => console.log(err))
+    
+    })
+    .catch(err => {console.log(err);throw err});
+  }
+
   render() {
     return (
       <View>
@@ -28,34 +45,24 @@ export default class Groups extends React.Component {
           <Icon style={{marginLeft: "auto",margin: 10}} onPress={() => {this.props.navigation.navigate('CreateGroup')}} name="group-add" size={40} color="#900" />
         </View>
         <FlatList
-          data={[
-            { key: "Devin" },
-            { key: "Jackson" },
-            { key: "James" },
-            { key: "Joel" },
-            { key: "John" },
-            { key: "Jillian" },
-            { key: "Jimmy" },
-            { key: "Julie" },
-          ]}
+          data={this.state.groups}
           renderItem={({ item }) => (
             <TouchableOpacity
               style={styles.item}
               onPress={() => {
                 this.props.navigation.navigate("Group", {
-                  name: item.key,
+                  id: item.groupId,
+                  name: item.name,
                 });
               }}
             >
               <View>
-                <Text>Image</Text>
-              </View>
-              <View>
-                <Text style={{ fontSize: 20 }}>{item.key}</Text>
+                <Text style={{ fontSize: 20 }}>{item.name}</Text>
                 <Text>Last activity</Text>
               </View>
             </TouchableOpacity>
           )}
+          keyExtractor={(item, index) => index.toString()}
         />
       </View>
     );
