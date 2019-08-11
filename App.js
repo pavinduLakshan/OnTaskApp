@@ -13,10 +13,6 @@ import {
 import axios from 'axios'
 import AsyncStorage from "@react-native-community/async-storage"
 
-// const request = axios.create({
-//   baseURL: 'http://192.168.1.100:8080/api',
-// })
-
 axios.defaults.baseURL='http://192.168.1.100:8080/api'
 
 axios.interceptors.request.use(
@@ -25,7 +21,6 @@ axios.interceptors.request.use(
     if (token) {
       config.headers.Authorization = "Bearer "+token
     }
-    console.log("Hey")
     return config
   },
   error => {

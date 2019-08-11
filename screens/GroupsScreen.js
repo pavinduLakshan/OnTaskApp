@@ -3,6 +3,7 @@ import { View, Text, FlatList, TouchableOpacity } from "react-native";
 import { Button } from "native-base";
 import axios from 'axios'
 import Icon from "react-native-vector-icons/MaterialIcons";
+import {  Body,  Card, CardItem } from "native-base";
 import ActionBar from "../components/ActionBar";
 
 const styles = {
@@ -40,11 +41,18 @@ export default class Groups extends React.Component {
     return (
       <View>
         <ActionBar navigation={this.props.navigation} name={"Groups"} />
-        <View style={{ display: "flex", flexDirection: "row" }}>
-          <Text style={{ fontSize: 30,margin: 10}}>Groups</Text>
-          <Icon style={{marginLeft: "auto",margin: 10}} onPress={() => {this.props.navigation.navigate('CreateGroup')}} name="group-add" size={40} color="#900" />
-        </View>
-        <FlatList
+        <Card style={{margin: 0}}>
+          <CardItem style={{backgroundColor: "#82E17B"}}>
+            <Body style={{display: "flex",flexDirection: "row",alignItems: "center"}}>
+            <Text style={{fontSize: 20}}>Groups</Text>
+            <Icon style={{marginLeft: "auto"}} onPress={() => {this.props.navigation.navigate('CreateGroup')}} name="group-add" size={30} color="black" />
+            </Body>
+          </CardItem>
+        </Card>
+
+        {
+          this.state.groups.length > 0 ? 
+          <FlatList
           data={this.state.groups}
           renderItem={({ item }) => (
             <TouchableOpacity
@@ -64,6 +72,11 @@ export default class Groups extends React.Component {
           )}
           keyExtractor={(item, index) => index.toString()}
         />
+          :
+          <View style={{width: "100%",flex: 1,alignItems: "center"}}>
+            <Text style={{fontSize: 20}}>No groups</Text>
+          </View>
+        }
       </View>
     );
   }

@@ -1,66 +1,135 @@
-import React, { Component } from 'react';
-import {View,Image,FlatList } from 'react-native'
-import ActionBar from '../components/ActionBar'
-import { Text, ListItem, Left, Body, Icon, Right, Title } from "native-base";
+import React, { Component } from "react";
+import { View, Image, FlatList } from "react-native";
+import axios from "axios";
+import ActionBar from "../components/ActionBar";
+import Icon from "react-native-vector-icons/MaterialIcons";
+import { Text, ListItem, Left, Body, Right, Title, Card, CardItem } from "native-base";
 
 class ProfileScreen extends Component {
-    constructor() {
-        super();
-        this.state = {
-          data: [
-            { name: "Preferences", header: false },
-            { name: "Account", header: false },
-            { name: "Help Center", header: false }
-          ],
-          stickyHeaderIndices: []
-        };
-      }
+  constructor() {
+    super();
+    this.state = {
+      data: [
+        { name: "Preferences", header: false },
+        { name: "Account", header: false },
+        { name: "Help Center", header: false },
+      ],
+      userData: [],
+      stickyHeaderIndices: [],
+      fname: "",
+      lname: "",
+    };
+  }
 
-      renderItem = ({ item }) => {
-        if (item.header) {
-          return (
-            <ListItem itemDivider>
-              <Left />
-              <Body style={{ marginRight: 40 }}>
-                <Text style={{ fontWeight: "bold" }}>
-                  {item.name}
-                </Text>
-              </Body>
-              <Right />
-            </ListItem>
-          );
-        } else if (!item.header) {
-          return (
-            <ListItem style={{ marginLeft: 0 }}>
-              <Body>
-                <Text>{item.name}</Text>
-              </Body>
-            </ListItem>
-          );
-        }
-      };
+  componentDidMount() {
+    axios
+      .get("/auth/user/me")
+      .then(res => {
+        axios
+          .get("/users/" + res.data.id)
+          .then(res => {
+            console.log("Users : ");
+            console.log(res.data);
+            this.setState({
+              fname: res.data.fname,
+              lname: res.data.lname ? res.data.lname : "",
+            });
+          })
+          .catch(err => console.log(err));
+      })
+      .catch(err => {
+        console.log(err);
+        throw err;
+      });
+  }
 
-    render() {
-        return (
-           <View>
-               <ActionBar navigation={this.props.navigation} name="Settings" />
-               <View style={{display: "flex",justifyContent: "center",alignItems: "center"}}>
-               <Image
-                  style={{borderWidth: 5,borderColor: "#21e6ec",borderRadius: 100,margin: 20,width: 200, height: 200}}
-                  source={{uri: 'https://www.gstatic.com/webp/gallery3/1.sm.png'}}
-               ></Image>
-               <Text style={{fontSize: 40}}>Pavindu Lakshan</Text>
-               </View>
-               <FlatList
+  renderItem = ({ item }) => {
+    if (item.header) {
+      return (
+        <ListItem itemDivider>
+          <Left />
+          <Body style={{ marginRight: 40 }}>
+            <Text style={{ fontWeight: "bold" }}>{item.name}</Text>
+          </Body>
+          <Right />
+        </ListItem>
+      );
+    } else if (!item.header) {
+      return (
+        <ListItem style={{ marginLeft: 0 }}>
+          <Body>
+            <Text>{item.name}</Text>
+          </Body>
+        </ListItem>
+      );
+    }
+  };
+
+  render() {
+    return (
+      <View>
+        <ActionBar navigation={this.props.navigation} name="Profile" />
+        <View
+          style={{
+            width: "100%",
+            backgroundColor: "#82E17B",
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
+          <Image
+            style={{
+              borderWidth: 5,
+              borderColor: "white",
+              borderRadius: 100,
+              margin: 10,
+              marginLeft: 10,
+              width: 80,
+              height: 80,
+            }}
+            source={{ uri: "https://www.gstatic.com/webp/gallery3/1.sm.png" }}
+          />
+          <Text style={{ fontSize: 30, color: "white" }}>
+            {this.state.fname + " " + this.state.lname}
+          </Text>
+        </View>
+        <Card style={{marginBottom: 0}}>
+          <CardItem style={{backgroundColor: "#82E17B"}}>
+            <Body style={{display: "flex",flexDirection: "row",alignItems: "center"}}>
+            <Icon name="contacts" size={30} color="black" />
+              <Text style={{marginLeft: 5}}>Contact</Text>
+            </Body>
+          </CardItem>
+        </Card>
+
+        <Card style={{marginBottom: 0}}>
+          <CardItem style={{backgroundColor: "#82E17B"}}>
+            <Body style={{display: "flex",flexDirection: "row",alignItems: "center"}}>
+            <Icon name="work" size={30} color="black" />
+              <Text style={{marginLeft: 5}}>Work</Text>
+            </Body>
+          </CardItem>
+        </Card>
+
+        <Card style={{marginBottom: 0}}>
+          <CardItem style={{backgroundColor: "#82E17B"}}>
+            <Body style={{display: "flex",flexDirection: "row",alignItems: "center"}}>
+            <Icon name="school" size={30} color="black" />
+              <Text style={{marginLeft: 5}}>Education</Text>
+            </Body>
+          </CardItem>
+        </Card>
+        {/* <FlatList
                style={{marginTop: "40%"}}
         data={this.state.data}
         renderItem={this.renderItem}
         keyExtractor={item => item.name}
         stickyHeaderIndices={this.state.stickyHeaderIndices}
-      />
-            </View>
-        );
-    }
+      /> */}
+      </View>
+    );
+  }
 }
 
 export default ProfileScreen;

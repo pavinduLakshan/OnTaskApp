@@ -1,7 +1,8 @@
 import React from "react";
-import { View, Text,Button,Image } from "react-native";
-import { DrawerActions } from 'react-navigation';
+import { View, Text } from "react-native";
 import Layout from '../components/Layout'
+import {  Body,  Card, CardItem } from "native-base";
+import AsyncStorage from "@react-native-community/async-storage";
 
 export default class Home extends React.Component {
     static navigationOptions = {
@@ -12,10 +13,11 @@ export default class Home extends React.Component {
       mood: ""
     }
 
-    componentDidMount(){
+    async componentDidMount(){
       var today = new Date()
       var curHr = today.getHours()
-      
+
+      //await AsyncStorage.removeItem('token')
       if (curHr < 12) {
         this.setState({mood: "morning"})
       } else if (curHr < 18) {
@@ -29,15 +31,14 @@ export default class Home extends React.Component {
       return (
         <Layout navigation = {this.props.navigation}>
           <View>
-            <View >
-              <Text style={{fontSize: 40}}>Today</Text>
-              <Text style={{color: "red",fontSize: 20}}>{new Date().toJSON().slice(0,10)}</Text>
-            </View>
-         <Image
-         resizeMode = 'cover'
-                   style={{ height: 250}}
-          source={{ uri: `https://source.unsplash.com/featured/?${this.state.mood},forest`}}
-        />
+          <Card>
+          <CardItem style={{backgroundColor: "#82E17B"}}>
+            <Body style={{display: "flex",flexDirection: "column"}}>
+            <Text style={{fontSize: 30,paddingTop: 0,fontWeight: "bold"}}>My Day</Text>
+            <Text style={{fontSize: 20}}>{new Date().toJSON().slice(0,10)}</Text>
+            </Body>
+          </CardItem>
+        </Card>
         </View>
         </Layout>
       );

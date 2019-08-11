@@ -6,11 +6,18 @@ class ActionBar extends Component {
         this.props.navigation.openDrawer()
     }
 
+    onActionSelected = position =>  {
+      if (position === 0) { // index of 'Settings'
+        this.props.navigation.navigate('Settings')
+      } 
+  }
+
+    // 
     render() {
         return (
             <Icon.ToolbarAndroid
             style={{
-              backgroundColor: 'red',
+              backgroundColor: '#26BE1C',
               height: 56,
               alignSelf: 'stretch',
               textAlign: 'center',
@@ -19,7 +26,7 @@ class ActionBar extends Component {
           navIconName="navicon"
           onIconClicked={this.openDrawer}
           title={this.props.name}
-          actions={[{title: 'Settings', iconName: "search", show: 'always'}]}
+          actions={[{title: 'Settings', iconName: "cog", show: 'always'},{title: 'Search', iconName: "search", show: 'always'}]}
           onActionSelected={this.onActionSelected} 
           />
         );
