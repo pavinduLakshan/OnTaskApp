@@ -2,6 +2,7 @@ import React from "react";
 import { View, Alert } from "react-native";
 import axios from "react-native-axios";
 import PhoneInput from "react-native-phone-input";
+import AsyncStorage from "@react-native-community/async-storage"
 import {
   Button,
   Text,
@@ -28,6 +29,14 @@ export default class Signup extends React.Component {
     Alert.alert("Sorry.Some required fields are msissing.");
   };
 
+  setToken = async token => {
+    await AsyncStorage.setItem("token", token).then(async val => {
+        const token = await AsyncStorage.getItem('token')
+        console.log(token)
+        this.props.navigation.navigate('Dashboard');
+    });
+  };
+
   signUp = () => {
     if (
       this.state.fname.length === 0 ||
@@ -44,11 +53,18 @@ export default class Signup extends React.Component {
         })
         .then(res => {
             if(res.status === 200 || res.status === 201){
-              this.props.navigation.navigate('VerifyMobile',{
-                userId: res.data.userId,
-                mobile: this.state.mobile,
-                reqId: res.data.requestId
-              })  
+              axios.post('http://192.168.1.100:8080/api/auth/signin/mobile',{
+                email: this.state.mobile,
+                password: this.state.mobile
+              }).then(res => {
+                console.log(res)
+                this.setToken(res.data.accessToken)
+              })
+              // this.props.navigation.navigate('VerifyMobile',{
+              //   userId: res.data.userId,
+              //   mobile: this.state.mobile,
+              //   reqId: res.data.requestId
+              // })  
             }
         })
         .catch(err => {
@@ -63,8 +79,7 @@ export default class Signup extends React.Component {
       <View style={{ paddingTop: "40%" }}>
         <Text style={{ textAlign: "center", fontSize: 40 }}>OnTask</Text>
         <Text style={{ fontSize: 20, textAlign: "center" }}>Signup</Text>
-        <Text>{this.state.fname}</Text>
-        <Text>{this.state.mobile}</Text>
+        
         <Form>
           <FormItem>
             <Label>First Name</Label>
