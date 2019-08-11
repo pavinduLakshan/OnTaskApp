@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { View,Text } from 'react-native' 
 import AsyncStorage from "@react-native-community/async-storage"
+import { Spinner } from 'native-base';
 
 class CheckAuth extends Component {
     constructor(props) {
@@ -20,7 +22,10 @@ class CheckAuth extends Component {
     
     render() {
         return (
-            <></>
+            <View style={{display: "flex",alignItems: "center",justifyContent: "center"}}>
+                 <Spinner color='green' />
+                 <Text style={{fontSize: 20}}>Loading..</Text>
+            </View>
         );
     }
 }
