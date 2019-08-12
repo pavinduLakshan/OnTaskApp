@@ -9,6 +9,7 @@ import Settings from '../screens/SettingsScreen';
 import Profile from '../screens/ProfileScreen';
 import CreateGroup from '../screens/CreateGroupScreen'
 import CheckAuth from '../Utils/CheckAuth'
+import EditProPic from '../screens/EditProPicScreen'
 import CustomDrawer from './CustomDrawer'
 
 const DrawNavigator = createDrawerNavigator({
@@ -24,6 +25,10 @@ const DrawNavigator = createDrawerNavigator({
       navigationOptions: {
         drawerLabel: () => null
       }},
+      EditProPic: {screen: EditProPic,
+        navigationOptions: {
+          drawerLabel: () => null
+        }},
   Groups: { screen: Groups},
   CreateGroup: { screen: CreateGroup},
   Signup: { screen: Signup},

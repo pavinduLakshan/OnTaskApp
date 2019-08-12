@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Image, FlatList } from "react-native";
+import { View, Image, FlatList,TouchableOpacity } from "react-native";
 import axios from "axios";
 import ActionBar from "../components/ActionBar";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -78,6 +78,7 @@ class ProfileScreen extends Component {
             alignItems: "center",
           }}
         >
+          <TouchableOpacity onPress={()=> this.props.navigation.navigate('EditProPic')}>
           <Image
             style={{
               borderWidth: 5,
@@ -90,6 +91,7 @@ class ProfileScreen extends Component {
             }}
             source={{ uri: "https://www.gstatic.com/webp/gallery3/1.sm.png" }}
           />
+</TouchableOpacity>
           <Text style={{ fontSize: 30, color: "white" }}>
             {this.state.fname + " " + this.state.lname}
           </Text>
