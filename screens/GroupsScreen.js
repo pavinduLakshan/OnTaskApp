@@ -11,7 +11,6 @@ const styles = {
     flex: 1,
     flexDirection: "row",
     padding: "2%",
-    borderTopWidth: 1,
     borderColor: "green",
   },
 };

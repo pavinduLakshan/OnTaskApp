@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text } from "react-native";
 import Layout from '../components/Layout'
 import {  Body,  Card, CardItem } from "native-base";
+import ActionBar from '../components/ActionBar'
 import AsyncStorage from "@react-native-community/async-storage";
 
 export default class Home extends React.Component {
@@ -13,34 +14,29 @@ export default class Home extends React.Component {
       mood: ""
     }
 
+  
     async componentDidMount(){
       var today = new Date()
       var curHr = today.getHours()
 
       //await AsyncStorage.removeItem('token')
-      if (curHr < 12) {
-        this.setState({mood: "morning"})
-      } else if (curHr < 18) {
-        this.setState({mood: "evening"})
-      } else {
-        this.setState({mood: "night"})
-    }
   }
 
     render() {
       return (
-        <Layout navigation = {this.props.navigation}>
+        <View>
+                          <ActionBar navigation={this.props.navigation} name="OnTask" />
           <View>
           <Card>
           <CardItem style={{backgroundColor: "#82E17B"}}>
-            <Body style={{display: "flex",flexDirection: "column"}}>
-            <Text style={{fontSize: 30,paddingTop: 0,fontWeight: "bold"}}>My Day</Text>
-            <Text style={{fontSize: 20}}>{new Date().toJSON().slice(0,10)}</Text>
+            <Body style={{display: "flex",flexDirection: "column",padding: 0}}>
+            <Text style={{fontSize: 25,padding: 0,fontWeight: "bold"}}>My Day</Text>
+            <Text style={{fontSize: 15,padding: 0}}>{new Date().toJSON().slice(0,10)}</Text>
             </Body>
           </CardItem>
         </Card>
         </View>
-        </Layout>
+        </View>
       );
     }
   }
