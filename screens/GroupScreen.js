@@ -1,17 +1,54 @@
 import React, { Component, Fragment } from "react";
-import { View } from "react-native";
+import { View,FlatList, TouchableOpacity,StyleSheet } from "react-native";
 import ActionBar from "../components/ActionBar";
 import axios from "axios";
 import { Card, CardItem, Body, Text } from "native-base";
 import Icon from "react-native-vector-icons/dist/FontAwesome";
 
+const styles = StyleSheet.create(
+  {
+    item: {
+      padding: "3%",
+    }
+  }
+)
+
 class GroupScreen extends Component {
   state = {
+    id: null,
     description: "",
+    submenus: [
+      {
+        name: "Tasks",
+        screen: "GroupTasks",
+        icon: "tasks"
+      },
+      {
+        name: "Announcements",
+        screen: "Announcements",
+        icon: "sticky-note"
+      },
+      {
+        name: "Activity",
+        screen: "GroupActivity",
+        icon: "user"
+      },
+      {
+        name: "Members",
+        screen: "GroupMembers",
+        icon: "users"
+      },
+      {
+        name: "Settings",
+        screen: "GroupSettings",
+        icon: "cog"
+      }
+    ]
   };
-
+  
   componentDidMount() {
     const id = this.props.navigation.getParam("id", " ");
+    this.setState({id: id})
     console.log(id);
     axios
       .get("/groups/" + id)
@@ -26,66 +63,65 @@ class GroupScreen extends Component {
     const name = this.props.navigation.getParam("name", " ");
 
     return (
-      <Fragment>
+      <View>
         <ActionBar navigation={this.props.navigation} name={name} />
-        <View
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            margin: 5,
-            marginTop: 10,
-          }}
-        >
-          <Card style={{ width: "50%", height: 150 }}>
-            <CardItem>
-              <Body>
-                <Text>Percentage</Text>
-              </Body>
-            </CardItem>
-          </Card>
 
-          <Card style={{ width: "50%", height: 150 }}>
-            <CardItem>
-              <Body>
-                <Text>Tasks</Text>
-              </Body>
-            </CardItem>
-          </Card>
-        </View>
-        <View style={{ flex: 1, flexDirection: "row", margin: 5 }}>
-          <Card style={{ width: "50%", height: 150 }}>
-            <CardItem>
-              <Body>
-                <Text>Members</Text>
-              </Body>
-            </CardItem>
-          </Card>
-
-          <Card style={{ width: "50%", height: 150 }}>
-            <CardItem>
-              <Body>
-                <Text>Notes</Text>
-              </Body>
-            </CardItem>
-          </Card>
-        </View>
         <View
-          style={{
-            paddingBottom: 190,
-            margin: 5,
-          }}
-        >
-          <View
           style={{
             display: "flex",
             flexDirection: "row"
-          }}>
-            <Icon name="sticky-note-o" size={25} />
-            <Text style={{ marginLeft: 5 }}>About</Text>
-          </View>
-          <Text>{this.state.description}</Text>
+          }}
+        >
+          <Card style={{ width: "33%", height: 100 }}>
+          <CardItem>
+            <Body>
+              <Text> Percentage</Text>
+            </Body>
+          </CardItem>
+        </Card>
+        <Card style={{ width: "33%", height: 100 }}>
+          <CardItem>
+            <Body>
+              <Text>No. of Overdue tasks</Text>
+            </Body>
+          </CardItem>
+        </Card>
+        <Card style={{ width: "33%", height: 100 }}>
+          <CardItem>
+            <Body>
+              <Text>No.of members</Text>
+            </Body>
+          </CardItem>
+        </Card>
         </View>
-      </Fragment>
+        <Card style={{ width: "100%", height: 100 }}>
+          <CardItem>
+            <Body>
+              <Text>Description</Text>
+            </Body>
+          </CardItem>
+        </Card>
+        <FlatList
+          data={this.state.submenus}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              onPress={() => {
+                this.props.navigation.navigate(item.screen, {
+                  id: this.state.id,
+                });
+              }}
+            >
+          <CardItem style={{ padding: "2%",width: "100%" }}>
+            <Body style={{display: "flex",flexDirection: "row",alignItems: "center"}}>
+            <Icon name={item.icon} size={15} color="#000" />
+              <Text style={{ fontSize: 16,marginLeft: "2%" }}>{item.name}</Text>
+            </Body>
+          </CardItem>
+            </TouchableOpacity>
+          )}
+          keyExtractor={(item, index) => index.toString()}
+        />
+      </View>
     );
   }
 }
