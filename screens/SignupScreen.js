@@ -21,7 +21,9 @@ export default class Signup extends React.Component {
     super(props);
     this.state = {
       fname: "",
-      mobile: ""
+      mobile: "",
+      disabled: false,
+      btnText: "Sign Up"
     };
   }
 
@@ -46,6 +48,7 @@ export default class Signup extends React.Component {
     ) {
       this.showError();
     } else {
+      this.setState({disabled: true,btnText: "Signing you up.."})
       axios
         .post("http://192.168.1.100:8080/api/auth/signup/mobile", {
           fname: this.state.fname,
@@ -76,19 +79,14 @@ export default class Signup extends React.Component {
 
   render() {
     return (
-      <View style={{ paddingTop: "40%" }}>
-        <Text style={{ textAlign: "center", fontSize: 40 }}>OnTask</Text>
-        <Text style={{ fontSize: 20, textAlign: "center" }}>Signup</Text>
+      <View style={{ paddingTop: "35%" }}>
+        <Text style={{ textAlign: "center", fontSize: 40,paddingBottom: 20 }}>OnTask</Text>
         
         <Form>
-          <FormItem>
-            <Label>First Name</Label>
-            <Input name="fname" onChangeText={(text) => this.setState({fname: text})} defaultValue={this.state.fname}/>
+          <FormItem style={{width: "90%"}}>
+            <Input placeholder="First name" name="fname" onChangeText={(text) => this.setState({fname: text})} defaultValue={this.state.fname}/>
           </FormItem>
 
-          <Label style={{ marginTop: "3%", marginLeft: "4%" }}>
-            Mobile Number
-          </Label>
           <PhoneInput
             ref="phone"
             style={{
@@ -107,8 +105,9 @@ export default class Signup extends React.Component {
             primary
             style={{ paddingBottom: 4, marginLeft: "4%", marginRight: "4%" }}
             onPress={() => this.signUp()}
+            disabled={this.state.disabled}
           >
-            <Text> Sign Up </Text>
+            <Text>{this.state.btnText}</Text>
           </Button>
         </Form>
       </View>
