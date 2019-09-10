@@ -3,6 +3,7 @@ import {NavigationActions} from 'react-navigation';
 import { Text, View, StyleSheet, ImageBackground } from 'react-native'
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import axios from 'axios'
+import AsyncStorage from "@react-native-community/async-storage";
 
 export default class drawerContentComponents extends Component {
 
@@ -21,13 +22,11 @@ export default class drawerContentComponents extends Component {
 
     componentDidMount(){
         axios.get("/auth/user/me")
-        .then(res => {
-          axios.get('/users/'+res.data.id).then(res => {
-            console.log("Users : ")
-            console.log(res.data)
-            this.setState({fname: res.data.fname,lname: res.data.lname ? res.data.lname : ""})
-          }).catch(err => console.log(err))
-        
+        .then(async res => {
+                axios.get('/users/'+res.data.id).then(res => {
+                    this.setState({fname: res.data.fname,lname: res.data.lname ? res.data.lname : ""})
+                  }).catch(err => console.log(err))
+           
         })
         .catch(err => {console.log(err);throw err});
       }

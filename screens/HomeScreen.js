@@ -16,9 +16,6 @@ export default class Home extends React.Component {
 
   
     async componentDidMount(){
-      var today = new Date()
-      var curHr = today.getHours()
-
       //await AsyncStorage.removeItem('token')
   }
 

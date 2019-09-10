@@ -72,32 +72,28 @@ class GroupScreen extends Component {
             flexDirection: "row"
           }}
         >
-          <Card style={{ width: "33%", height: 100 }}>
-          <CardItem>
-            <Body>
-              <Text> Percentage</Text>
-            </Body>
+          <Card style={{ width: "33%", backgroundColor: "#26BE1C",display: "flex",justifyContent: "center",alignItems: "center",height: 100 }}>
+          <CardItem style={{display: "flex",justifyContent: "center",alignItems: "center",backgroundColor: "#26BE1C"}}>
+              <Text style={{fontSize: 35,color: "white"}}>0%</Text>
           </CardItem>
         </Card>
-        <Card style={{ width: "33%", height: 100 }}>
-          <CardItem>
-            <Body>
-              <Text>No. of Overdue tasks</Text>
-            </Body>
+        <Card style={{ width: "33%", backgroundColor: "red",display: "flex",justifyContent: "center",alignItems: "center",height: 100 }}>
+          <CardItem style={{display: "flex",justifyContent: "center",alignItems: "center",backgroundColor: "red"}}>
+              <Text style={{fontSize: 35,color: "white"}}>4</Text>
           </CardItem>
         </Card>
-        <Card style={{ width: "33%", height: 100 }}>
-          <CardItem>
-            <Body>
-              <Text>No.of members</Text>
-            </Body>
+        <Card style={{ width: "33%", backgroundColor: "#26BE1C",display: "flex",justifyContent: "center",alignItems: "center",height: 100 }}>
+          <CardItem style={{display: "flex",justifyContent: "center",alignItems: "center",backgroundColor: "#26BE1C"}}>
+              <Text style={{fontSize: 35,color: "white"}}>0%</Text>
           </CardItem>
         </Card>
+       
         </View>
         <Card style={{ width: "100%", height: 100 }}>
           <CardItem>
             <Body>
               <Text>Description</Text>
+              <Text>{this.state.description}</Text>
             </Body>
           </CardItem>
         </Card>
