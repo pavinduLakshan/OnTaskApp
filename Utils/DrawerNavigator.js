@@ -12,7 +12,7 @@ import CreateGroup from "../screens/CreateGroupScreen";
 import CheckAuth from "../Utils/CheckAuth";
 import EditProPic from "../screens/EditProPicScreen";
 import CustomDrawer from "./CustomDrawer";
-import GroupTasks from "../screens/GroupTasks";
+import GroupTasks from "../screens/GroupTasks/GroupTasks";
 import GroupActivity from "../screens/GroupActivity";
 import Announcements from "../screens/Announcements";
 import GroupSettings from "../screens/GroupSettings";
