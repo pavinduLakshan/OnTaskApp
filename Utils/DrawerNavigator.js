@@ -14,44 +14,9 @@ import EditProPic from "../screens/EditProPicScreen";
 import CustomDrawer from "./CustomDrawer";
 import GroupTasks from "../screens/GroupTasks/GroupTasks";
 import GroupActivity from "../screens/GroupActivity";
-import Announcements from "../screens/Announcements";
+import Announcements from "../screens/GroupNotices/Announcements";
 import GroupSettings from "../screens/GroupSettings";
 import GroupMembers from "../screens/GroupMembers";
-
-export const MainStack = createStackNavigator({
-  GroupSettings: {
-    screen: GroupSettings,
-    navigationOptions: {
-      title: "Group Settings",
-      gesturesEnabled: false,
-      headerLeft: null,
-    },
-  },
-  GroupMembers: {
-    screen: GroupMembers,
-    navigationOptions: {
-      title: "Group Members",
-    },
-  },
-  GroupTasks: {
-    screen: GroupTasks,
-    navigationOptions: {
-      title: "Group Tasks",
-    },
-  },
-  GroupActivity: {
-    screen: GroupActivity,
-    navigationOptions: {
-      title: "Group Activity",
-    },
-  },
-  Announcements: {
-    screen: Announcements,
-    navigationOptions: {
-      title: "Announcements",
-    },
-  },
-});
 
 const DrawNavigator = createDrawerNavigator(
   {
@@ -66,9 +31,6 @@ const DrawNavigator = createDrawerNavigator(
     },
     VerifyMobile: { 
       screen: VerifyMobile 
-    },
-    GroupSettings: { 
-      screen: MainStack 
     },
     Group: { 
       screen: Group 
