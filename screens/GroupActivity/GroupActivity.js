@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Text } from "react-native";
+import { Text,View } from "react-native";
 import axios from 'axios'
 import ActionBar from "../../components/ActionBar";
 import ActivityItem from './ActivityItem'
@@ -42,12 +42,14 @@ export default class TaskScreen extends React.Component {
         >
           Return to group
         </Text>
+        <View>
         {this.state.activities.map( activity => 
           <ActivityItem 
             key={activity.id}
             description={activity.description}
             createdAt={activity.createdAt}
           />)}
+        </View>
       </Fragment>
     );
   }
