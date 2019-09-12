@@ -13,7 +13,7 @@ import CheckAuth from "../Utils/CheckAuth";
 import EditProPic from "../screens/EditProPicScreen";
 import CustomDrawer from "./CustomDrawer";
 import GroupTasks from "../screens/GroupTasks/GroupTasks";
-import GroupActivity from "../screens/GroupActivity";
+import GroupActivity from "../screens/GroupActivity/GroupActivity";
 import Announcements from "../screens/GroupNotices/Announcements";
 import GroupSettings from "../screens/GroupSettings";
 import GroupMembers from "../screens/GroupMembers";
