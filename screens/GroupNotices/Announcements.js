@@ -50,7 +50,7 @@ export default class GroupNoticeScreen extends React.Component {
         {this.state.notices.map( notice => <NoticeItem 
           key={notice.id}
           name={notice.title}
-          addedDate={notice.createdAt}
+          addedDate={notice.date}
         />)}
       </Fragment>
     );
