@@ -22,7 +22,7 @@ class CheckAuth extends Component {
     
     render() {
         return (
-            <View style={{display: "flex",alignItems: "center",justifyContent: "center"}}>
+            <View style={{display: "flex",alignItems: "center",height: "100%",justifyContent: "center"}}>
                  <Spinner color='green' />
                  <Text style={{fontSize: 20}}>Loading..</Text>
             </View>
