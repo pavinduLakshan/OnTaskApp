@@ -18,6 +18,7 @@ class ProfileScreen extends Component {
       stickyHeaderIndices: [],
       fname: "",
       lname: "",
+      emailHash: ""
     };
   }
 
@@ -33,6 +34,7 @@ class ProfileScreen extends Component {
             this.setState({
               fname: res.data.fname,
               lname: res.data.lname ? res.data.lname : "",
+              emailHash: res.data.emailHash
             });
           })
           .catch(err => console.log(err));
@@ -89,17 +91,17 @@ class ProfileScreen extends Component {
               width: 80,
               height: 80,
             }}
-            source={{ uri: "https://www.gstatic.com/webp/gallery3/1.sm.png" }}
+            source={{ uri: `https://www.gravatar.com/avatar/${this.state.emailHash}?d=retro&s=80` }}
           />
 </TouchableOpacity>
-          <Text style={{ fontSize: 30, color: "white" }}>
+          <Text style={{ fontSize: 20, color: "white" }}>
             {this.state.fname + " " + this.state.lname}
           </Text>
         </View>
         <Card style={{marginBottom: 0}}>
           <CardItem style={{backgroundColor: "#82E17B"}}>
             <Body style={{display: "flex",flexDirection: "row",alignItems: "center"}}>
-            <Icon name="contacts" size={30} color="black" />
+            <Icon name="contacts" size={15} color="black" />
               <Text style={{marginLeft: 5}}>Contact</Text>
             </Body>
           </CardItem>
@@ -108,7 +110,7 @@ class ProfileScreen extends Component {
         <Card style={{marginBottom: 0}}>
           <CardItem style={{backgroundColor: "#82E17B"}}>
             <Body style={{display: "flex",flexDirection: "row",alignItems: "center"}}>
-            <Icon name="work" size={30} color="black" />
+            <Icon name="work" size={15} color="black" />
               <Text style={{marginLeft: 5}}>Work</Text>
             </Body>
           </CardItem>
@@ -117,7 +119,7 @@ class ProfileScreen extends Component {
         <Card style={{marginBottom: 0}}>
           <CardItem style={{backgroundColor: "#82E17B"}}>
             <Body style={{display: "flex",flexDirection: "row",alignItems: "center"}}>
-            <Icon name="school" size={30} color="black" />
+            <Icon name="school" size={15} color="black" />
               <Text style={{marginLeft: 5}}>Education</Text>
             </Body>
           </CardItem>

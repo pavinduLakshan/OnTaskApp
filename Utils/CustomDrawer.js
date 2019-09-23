@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { NavigationActions } from "react-navigation";
-import { Text, View, StyleSheet, ImageBackground } from "react-native";
+import { Text, View, StyleSheet, Image } from "react-native";
 import Icon from "react-native-vector-icons/dist/FontAwesome";
 import axios from "axios";
-import AsyncStorage from "@react-native-community/async-storage";
 
 export default class drawerContentComponents extends Component {
   state = {
     fname: "",
     lname: "",
+    emailHash: ""
   };
 
   navigateToScreen = route => () => {
@@ -28,6 +28,7 @@ export default class drawerContentComponents extends Component {
             this.setState({
               fname: res.data.fname,
               lname: res.data.lname ? res.data.lname : "",
+              emailHash: res.data.emailHash
             });
           })
           .catch(err => console.log(err));
@@ -49,6 +50,7 @@ export default class drawerContentComponents extends Component {
               this.setState({
                 fname: res.data.fname,
                 lname: res.data.lname ? res.data.lname : "",
+                emailHash:this.state.emailHash
               });
             })
             .catch(err => console.log(err));
@@ -63,14 +65,33 @@ export default class drawerContentComponents extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.headerContainer}>
-          <Text style={styles.headerText}>
+        
+        <View
+          style={{
+            width: "100%",
+            backgroundColor: "#82E17B",
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
+          <Image
+            style={{
+              borderWidth: 5,
+              borderColor: "white",
+              borderRadius: 100,
+              margin: 10,
+              marginLeft: 10,
+              width: 80,
+              height: 80,
+            }}
+            source={{ uri: `https://www.gravatar.com/avatar/${this.state.emailHash}?d=retro&s=80` }}
+          />
+          <Text style={{ fontSize: 20, color: "white" }}>
             {this.state.fname + " " + this.state.lname}
           </Text>
-          {/* <ImageBackground source={{uri: "https://source.unsplash.com/featured/?morning,light"}} style={{flex: 1, width: 280,justifyContent: 'center'}} >
-                    <Text style={styles.headerText}>Pavindu Lakshan</Text>
-                </ImageBackground> */}
         </View>
+ 
         <View style={styles.screenContainer}>
           <View
             style={[
