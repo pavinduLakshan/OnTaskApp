@@ -1,21 +1,37 @@
 import React, { Component } from 'react';
-import { View} from 'react-native'
+import { Alert} from 'react-native'
 import {
     Text,
     Form,
     Item,
     Input,
     Label,
-    Header,
-    Left,
-    Right
+    Button
   } from "native-base";
+  import axios from 'axios'
 
 class GeneralInfoSettings extends Component {
     state={
         fname: "",
         lname: "",
         bio: ""
+    }
+
+    updateUserInfo = () => {
+      axios.get("/auth/user/me")
+      .then(res => {
+        axios.post("/user/"+res.data.id+"/basic-info",{
+          fname: this.state.fname,
+          lname: this.state.lname,
+          bio: this.state.bio
+        }).then(
+          res => {
+            if(res.status === 200){
+              Alert.alert("User Info updated")
+            }
+          }
+        ).catch(err => console.log(err))
+      }).catch(err => console.log(err))
     }
 
     render() {
@@ -41,10 +57,15 @@ class GeneralInfoSettings extends Component {
               <Label>Bio</Label>
               <Input
                 multiline={true}
-                numberOfLines={8}
+                numberOfLines={4}
                 onChangeText={text => this.setState({ bio: text })}
                 value={this.state.bio}
               />
+            </Item>
+            <Item style={{marginTop: "2%"}}>
+            <Button success onPress={this.updateUserInfo}>
+            <Text>update</Text>
+          </Button>
             </Item>
           </Form>
             </>
