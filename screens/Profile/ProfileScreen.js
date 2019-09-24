@@ -1,17 +1,30 @@
 import React, { Component } from "react";
-import { View, Image, FlatList,TouchableOpacity } from "react-native";
+import { View, Image, TouchableOpacity } from "react-native";
 import axios from "axios";
 import ActionBar from "../../components/ActionBar";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import { Text, ListItem, Left, Body, Right, Title, Card, CardItem } from "native-base";
+import { Text,  Body,  Card, CardItem } from "native-base";
 import AddEducationModal from './AddEducationModal'
 import AddWorkModal from './AddWorkModal'
+
+const Item = props => {
+  return (
+            <View style={{padding: "1%"}}>
+                <Text style={{fontSize: 15}}>{props.place}</Text>
+                <Text style={{color: "gray"}}>From {props.from.slice(0,10)} - {props.to ? props.to.slice(0,10) : "Present"}</Text>
+
+                <Text style={{marginTop: "2%"}}>{props.description}</Text>
+            </View>
+  )
+}
 
 class ProfileScreen extends Component {
   constructor() {
     super();
     this.state = {
       userData: [],
+      education: [],
+      work: [],
       stickyHeaderIndices: [],
       fname: "",
       lname: "",
@@ -26,8 +39,6 @@ class ProfileScreen extends Component {
         axios
           .get("/users/" + res.data.id)
           .then(res => {
-            console.log("Users : ");
-            console.log(res.data);
             this.setState({
               fname: res.data.fname,
               lname: res.data.lname ? res.data.lname : "",
@@ -35,6 +46,14 @@ class ProfileScreen extends Component {
             });
           })
           .catch(err => console.log(err));
+
+          axios.get('/users/'+res.data.id+'/education').then(
+            res => this.setState({education: res.data})
+          )
+
+          axios.get('/users/'+res.data.id+'/work').then(
+            res => this.setState({work: res.data})
+          )
       })
       .catch(err => {
         console.log(err);
@@ -92,6 +111,14 @@ class ProfileScreen extends Component {
             </Body>
           </CardItem>
         </Card>
+        {this.state.work.map(w => 
+            <Item 
+              key={w.id}
+              place={w.title+ " at "+w.place}
+              from={w.startDate}
+              to={w.endDate}
+              description={w.description}
+            />)}
 
         <Card style={{marginBottom: 0}}>
           <CardItem style={{backgroundColor: "#82E17B"}}>
@@ -102,7 +129,16 @@ class ProfileScreen extends Component {
               <AddEducationModal />
             </Body>
           </CardItem>
+         
         </Card>
+        {this.state.education.map(e => 
+            <Item 
+              key={e.id}
+              place={e.institute}
+              from={e.startDate}
+              to={e.endDate}
+              description={e.description}
+            />)}
       </View>
     );
   }
