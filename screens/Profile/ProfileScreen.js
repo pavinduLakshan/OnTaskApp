@@ -1,19 +1,16 @@
 import React, { Component } from "react";
 import { View, Image, FlatList,TouchableOpacity } from "react-native";
 import axios from "axios";
-import ActionBar from "../components/ActionBar";
+import ActionBar from "../../components/ActionBar";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { Text, ListItem, Left, Body, Right, Title, Card, CardItem } from "native-base";
+import AddEducationModal from './AddEducationModal'
+import AddWorkModal from './AddWorkModal'
 
 class ProfileScreen extends Component {
   constructor() {
     super();
     this.state = {
-      data: [
-        { name: "Preferences", header: false },
-        { name: "Account", header: false },
-        { name: "Help Center", header: false },
-      ],
       userData: [],
       stickyHeaderIndices: [],
       fname: "",
@@ -45,28 +42,6 @@ class ProfileScreen extends Component {
       });
   }
 
-  renderItem = ({ item }) => {
-    if (item.header) {
-      return (
-        <ListItem itemDivider>
-          <Left />
-          <Body style={{ marginRight: 40 }}>
-            <Text style={{ fontWeight: "bold" }}>{item.name}</Text>
-          </Body>
-          <Right />
-        </ListItem>
-      );
-    } else if (!item.header) {
-      return (
-        <ListItem style={{ marginLeft: 0 }}>
-          <Body>
-            <Text>{item.name}</Text>
-          </Body>
-        </ListItem>
-      );
-    }
-  };
-
   render() {
     return (
       <View>
@@ -83,8 +58,8 @@ class ProfileScreen extends Component {
           <TouchableOpacity onPress={()=> this.props.navigation.navigate('EditProPic')}>
           <Image
             style={{
-              borderWidth: 5,
-              borderColor: "white",
+              // borderWidth: 5,
+              // borderColor: "white",
               borderRadius: 100,
               margin: 10,
               marginLeft: 10,
@@ -112,6 +87,8 @@ class ProfileScreen extends Component {
             <Body style={{display: "flex",flexDirection: "row",alignItems: "center"}}>
             <Icon name="work" size={15} color="black" />
               <Text style={{marginLeft: 5}}>Work</Text>
+              <View style={{flexGrow: 1}} />
+              <AddWorkModal />
             </Body>
           </CardItem>
         </Card>
@@ -121,16 +98,11 @@ class ProfileScreen extends Component {
             <Body style={{display: "flex",flexDirection: "row",alignItems: "center"}}>
             <Icon name="school" size={15} color="black" />
               <Text style={{marginLeft: 5}}>Education</Text>
+              <View style={{flexGrow: 1}} />
+              <AddEducationModal />
             </Body>
           </CardItem>
         </Card>
-        {/* <FlatList
-               style={{marginTop: "40%"}}
-        data={this.state.data}
-        renderItem={this.renderItem}
-        keyExtractor={item => item.name}
-        stickyHeaderIndices={this.state.stickyHeaderIndices}
-      /> */}
       </View>
     );
   }

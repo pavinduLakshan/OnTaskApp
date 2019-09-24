@@ -77,8 +77,6 @@ export default class drawerContentComponents extends Component {
         >
           <Image
             style={{
-              borderWidth: 5,
-              borderColor: "white",
               borderRadius: 100,
               margin: 10,
               marginLeft: 10,

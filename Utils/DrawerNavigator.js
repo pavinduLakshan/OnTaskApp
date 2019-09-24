@@ -7,7 +7,7 @@ import VerifyMobile from "../screens/VerifyMobileScreen";
 import Tasks from "../screens/TasksScreen";
 import Group from "../screens/GroupScreen";
 import Settings from "../screens/Settings/SettingsScreen";
-import Profile from "../screens/ProfileScreen";
+import Profile from "../screens/Profile/ProfileScreen";
 import CreateGroup from "../screens/CreateGroupScreen";
 import CheckAuth from "../Utils/CheckAuth";
 import EditProPic from "../screens/EditProPicScreen";
