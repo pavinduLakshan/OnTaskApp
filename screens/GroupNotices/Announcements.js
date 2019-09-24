@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { Text,View } from "react-native";
 import NoticeItem from './NoticeItem'
+import Icon from "react-native-vector-icons/MaterialIcons";
 import CreateNoticeModal from './CreateNoticeModal'
 import axios from 'axios'
 import ActionBar from "../../components/ActionBar";
@@ -41,8 +42,9 @@ export default class GroupNoticeScreen extends React.Component {
               id: this.state.gid,
             })
           }
+          style={{color: "blue"}}
         >
-          Return to group
+          <Icon name="keyboard-backspace" size={20} color="black"/>
         </Text>
         <View style={{flexGrow: 1}}></View>
         <CreateNoticeModal gid={this.state.gid}/>

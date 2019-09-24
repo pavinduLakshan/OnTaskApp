@@ -111,14 +111,8 @@ class CreateNoticeModal extends Component {
 
         <Icon name="clipboard-notes"  onPress={() => {
             this.setModalVisible(true);
-          }} size={35} />
-        {/* <Button
-         
-          style={{ marginTop: 0 }}
-          success
-        >
-          <Text>Add task</Text>
-        </Button> */}
+          }} size={15} style={{paddingRight: "1%"}} />
+      
       </View>
     );
   }

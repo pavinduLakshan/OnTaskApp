@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Modal, TouchableHighlight, View, ScrollView, Alert } from "react-native";
+import Icon from "react-native-vector-icons/MaterialIcons";
 import {
   Container,
   Text,
@@ -71,7 +72,9 @@ class AddWorkModal extends Component {
                   this.setModalVisible(!this.state.modalVisible);
                 }}
               >
-                <Text style={{ textAlign: "right" }}>Close</Text>
+                <Text style={{ textAlign: "right" }}>
+                <Icon name="highlight-off" size={20} color="black" />
+                </Text>
               </TouchableHighlight>
 
               <Form>
@@ -163,7 +166,7 @@ class AddWorkModal extends Component {
           success
 
         >
-          Add Workplace
+                          <Icon name="add" size={15} color="black" />
         </Text>
       </View>
     );

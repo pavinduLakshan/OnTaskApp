@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Modal, TouchableHighlight, View, ScrollView, Alert } from "react-native";
+import Icon from "react-native-vector-icons/MaterialIcons";
 import {
   Container,
   Text,
@@ -70,7 +71,9 @@ class AddEducationModal extends Component {
                   this.setModalVisible(!this.state.modalVisible);
                 }}
               >
-                <Text style={{ textAlign: "right" }}>Close</Text>
+                <Text style={{ textAlign: "right" }}>
+                <Icon name="highlight-off" size={20} color="black" />
+                </Text>
               </TouchableHighlight>
 
               <Form>
@@ -141,6 +144,7 @@ class AddEducationModal extends Component {
                 onPress={this.addEducation}
               >
                 <Text>Add School</Text>
+                
               </Button>
             </ScrollView>
           </View>
@@ -154,7 +158,7 @@ class AddEducationModal extends Component {
           success
 
         >
-          Add Institute
+                                    <Icon name="add" size={15} color="black" />
         </Text>
       </View>
     );
