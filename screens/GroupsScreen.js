@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, FlatList, TouchableOpacity } from "react-native";
 import { Button } from "native-base";
 import axios from 'axios'
+import HTML from 'react-native-render-html';
 import Icon from "react-native-vector-icons/MaterialIcons";
 import {  Body,  Card, CardItem } from "native-base";
 import ActionBar from "../components/ActionBar";
@@ -36,6 +37,21 @@ export default class Groups extends React.Component {
     .catch(err => {console.log(err);throw err});
   }
 
+  
+  componentDidUpdate(prevProps){
+    if(prevProps !== this.props){
+      axios.get("/auth/user/me")
+    .then(res => {
+      axios.get('/'+res.data.id + '/groups').then(res => {
+        console.log(res.data)
+        this.setState({groups: res.data})
+      }).catch(err => console.log(err))
+    
+    })
+    .catch(err => {console.log(err);throw err});
+    }
+  }
+
   render() {
     return (
       <View>
@@ -65,7 +81,7 @@ export default class Groups extends React.Component {
             >
               <View>
                 <Text style={{ fontSize: 20 }}>{item.name}</Text>
-                <Text>Last activity</Text>
+                <HTML emSize={1.5} html={item.lastActivity}/>
               </View>
             </TouchableOpacity>
           )}
